@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Create a Calendar Template</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+    href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+    media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<link rel="stylesheet"
+    href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="../../../resources/css/adminTopPage.css" rel="stylesheet" />
+<link href="../../../resources/css/font-awesome.min.css"
+    rel="stylesheet" />
+<link href="../../../resources/css/font-awesome.css" rel="stylesheet" />
+<script>
+	$(function() {
+		$("#dialog-message").dialog({
+			modal : true,
+			buttons : {
+				Ok : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+	});
+</script>
+<style>
+.footer {
+	width: 100%;
+	height: 20px;
+	clear: both;
+	/* background-color: green; */
+}
+</style>
+</head>
+<body>
+    <div th:include="fragments/header"></div>
+    <span th:if="${templateAddError}"> <!--  <span>"Error"</span>-->
+        <span id="dialog-message" title="Error">
+            <p>
+                <img
+                    th:src="@{https://1.bp.blogspot.com/-D02tSQTZfIY/WFLDLYAAmqI/AAAAAAAA4o4/7EQcMtACxU0YABcLc0QzhLXkaoSh1IsMQCPcBGAYYCw/s1600/warning_sign.png}"
+                    width="60" height="60" align="middle" /> Existing
+                template data.
+            </p>
+    </span>
+    </span>
+    <span th:if="${templateCalendarCSVError}"> <!--  <span>"Error"</span>-->
+        <span id="dialog-message" title="Error">
+            <p>
+                <img
+                    th:src="@{https://1.bp.blogspot.com/-D02tSQTZfIY/WFLDLYAAmqI/AAAAAAAA4o4/7EQcMtACxU0YABcLc0QzhLXkaoSh1IsMQCPcBGAYYCw/s1600/warning_sign.png}"
+                    width="60" height="60" align="middle" /> Invalid
+                file path. Please try again.
+            </p>
+    </span>
+    </span>
+    <span th:if="${calendarNameMaxError}"> <!--  <span>"Error"</span>-->
+        <span id="dialog-message" title="Error">
+            <p>
+                <img
+                    th:src="@{https://1.bp.blogspot.com/-D02tSQTZfIY/WFLDLYAAmqI/AAAAAAAA4o4/7EQcMtACxU0YABcLc0QzhLXkaoSh1IsMQCPcBGAYYCw/s1600/warning_sign.png}"
+                    width="60" height="60" align="middle" /> Invalid
+                Input! Please try again.
+            </p>
+    </span>
+    </span>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+            <div class="col-sm-6">
+                <h3>
+                    <b>Create a calendar template</b>
+                </h3>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-12">
+            <div class="col-sm-8">
+                <p>You can create a calendar and import events from
+                    CSV file but using CSV event update is only
+                    available once at the calendar creation time. To add
+                    more events later on, please use input form.</p>
+            </div>
+        </div>
+        <br />
+
+    </div>
+    <br />
+    <!--  <div class="middle"> -->
+    <form action="#" th:action="@{/admin/calendar_template/new}"
+        th:object="${templateCalendarForm}" method="post"
+        enctype="multipart/form-data">
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <label class="control-label col-sm-3">
+                    Calendar Name
+                    <font color="red">*</font>
+                </label>
+
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon"> <i
+                            class="fa fa-calendar"></i>
+                        </span>
+                        <input type="text" th:field="*{calendarName}"
+                            placeholder="Calendar Name"
+                            required="required" class="form-control" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <div class="col-sm-offset-3 col-sm-6">Max 50
+                    characters</div>
+            </div>
+        </div>
+        <div class="footer"></div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <label class="control-label col-sm-3">
+                    Import events from CSV
+                    <font color="red">*</font>
+                </label>
+
+                <div class="col-sm-6">
+                    <div class="btn btn-primary fileUpload ">
+
+                        <input id="uploadBtn" type="file" name="file"
+                            class="uploader-input span8" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <a th:href="@{/admin/calendar_template/download}">
+                        Download CSV Template </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer"></div>
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <button type="submit" class="btn btn-warning">Create</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

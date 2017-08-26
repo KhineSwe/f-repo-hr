@@ -1,0 +1,19 @@
+.table.table-bordered{
+
+   border:1px solid #3CABDB;
+
+   margin-top:20px;
+
+ }
+
+.table.table-bordered > thead{
+
+   border:1px solid #3CABDB;
+
+}
+
+.table.table-bordered > tbody > tr > td{
+
+   border:1px solid #3CABDB;
+
+}

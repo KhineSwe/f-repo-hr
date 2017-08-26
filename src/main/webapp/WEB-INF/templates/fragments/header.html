@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<style>
+#nav_bar {
+	background-color: #68D9FF;
+	border-color: #68D9FF;
+}
+</style>
+<body>
+    <nav id="nav_bar" class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a th:href="@{/admin}" class="navbar-brand">
+                    <img th:src="@{/resources/images/F-REPO_logo.png}"
+                        width="130" height="55" />
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <h4>
+                            <a class="navbar-brand" th:href="@{/admin}"
+                                data-toggle="tooltip"
+                                data-placement="bottom" title="Home"
+                                style="font-family: cursive; font-size: 28px; padding-left: 0.5em;">System
+                                Admin Site</a>
+                        </h4>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a th:href="@{/admin/change_password}">
+                            <img
+                                th:src="@{/resources/images/profile.png}"
+                                width="50" height="50" />
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/adminLogout}">
+                            <img
+                                th:src="@{/resources/images/logout.png}"
+                                width="50" height="50" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

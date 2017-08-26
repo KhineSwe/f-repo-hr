@@ -1,0 +1,91 @@
+body {font-family: "Lato", sans-serif;}
+
+.pad {
+	padding-top: 1em;
+	padding-bottom: 2em;
+}
+.error{
+color:red;font-weight:bold;
+}
+.file {
+	position: relative;
+}
+
+.button-green {
+	font-family: "Segoe UI", "Segoe", "Verdana";
+	background: #da5c5c center top no-repeat;
+	background-image: linear-gradient(rgb(15, 158, 10), rgb(24, 105, 21));
+	overflow: hidden;
+	color: white;
+	border-radius: 5px;
+	width: 82px;
+	position: relative;
+	padding: 8px 10px 8px 10px;
+}
+
+.button-green:hover {
+	background: #0a8406 center top no-repeat;
+	background-image: linear-gradient(rgb(212, 129, 129), rgb(24, 105, 21));
+}
+
+.file-upload {
+	opacity: 0;
+	width: 102px;
+	height: 35px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 30px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity = 0);
+}
+
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #2e9276;
+}
+
+/* Float the list items side by side */
+ul.tab li {float: left;}
+
+/* Style the links inside the list items */
+ul.tab li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of links on hover */
+ul.tab li a:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+ul.tab li a:focus, .active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}

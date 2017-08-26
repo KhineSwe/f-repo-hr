@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Edit System</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+    href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+    media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<link rel="stylesheet"
+    href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="../../../resources/css/adminTopPage.css" rel="stylesheet" />
+<link href="../../../resources/css/font-awesome.min.css"
+    rel="stylesheet" />
+<link href="../../../resources/css/font-awesome.css" rel="stylesheet" />
+<script>
+	$(function() {
+		$("#dialog-message").dialog({
+			modal : true,
+			buttons : {
+				Ok : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+	});
+</script>
+</head>
+<body>
+    <div th:include="fragments/header">...</div>
+    <span th:if="${error}">
+        <!--  <span>"Error"</span>-->
+        <span id="dialog-message" title="Error">
+            <p>
+                <img
+                    th:src="@{https://1.bp.blogspot.com/-D02tSQTZfIY/WFLDLYAAmqI/AAAAAAAA4o4/7EQcMtACxU0YABcLc0QzhLXkaoSh1IsMQCPcBGAYYCw/s1600/warning_sign.png}"
+                    width="60" height="60" align="middle" />
+                <label th:text="${error}"></label>
+            </p>
+        </span>
+    </span>
+    <form action="#"
+        th:action="@{/admin/systems/edit/{system_id}(system_id=${systemList.id})}"
+        th:object="${systemList}" method="post">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <div class="col-sm-6">
+                    <h3>
+                        <b>Edit System </b>
+                    </h3>
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <label class="control-label col-sm-3">
+                    Company ID:
+                    <font color="red">*</font>
+                </label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-building"></i>
+                        </span>
+                        <input type="text" class="form-control"
+                            th:field="*{systemId}" required="required" />
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="hidden" th:field="*{id}" />
+            <div class="col-sm-offset-2 col-sm-8">
+                <label class="control-label col-sm-3">
+                    Company Name:
+                    <font color="red">*</font>
+                </label>
+
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-building"></i>
+                        </span>
+                        <input type="text" class="form-control"
+                            th:field="*{companyName}"
+                            required="required" />
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <button type="submit" class="btn btn-warning">Update</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

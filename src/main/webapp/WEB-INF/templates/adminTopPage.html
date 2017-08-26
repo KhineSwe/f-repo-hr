@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>System Admin Top Page</title>
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link href="../../../resources/css/font-awesome.min.css"
+    rel="stylesheet" />
+<link href="../../../resources/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../../resources/css/alertify.min.css" />
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../../resources/js/alertify.min.js"></script>
+
+<style>
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #3CABDB;
+	width: 90%;
+}
+
+td, th {
+	/* border: 1px solid #3CABDB; */
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+    <div th:include="fragments/header">...</div>
+    <form action="#" th:action="@{/admin/change_password}"
+        th:object="${system_account}" method="post">
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-17">
+                <div class="col-sm-6">
+                    <h3>
+                        <b>System Admin Top Page</b>
+                    </h3>
+                </div>
+            </div>
+            <br />
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-15">
+                <label class="control-label col-sm-5">
+                    <h4>System List</h4>
+                </label>
+                <div class="col-sm-offset-1 col-sm-1">
+                    <a type="button" class="btn btn-warning btn-md"
+                        th:href="@{/admin/systems/new}"
+                        style="color: white; width: 100px; height: 30px;">Add</a>
+                </div>
+                <div class="col-sm-offset-1 col-sm-2">
+                    <h4>Calendar Template</h4>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-15">
+                <div class="col-sm-8">
+                    <table>
+                        <tr bgcolor="#3CABDB">
+                            <th>System ID</th>
+                            <th>Company Name</th>
+                            <th>Created</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr th:each="system : ${systems}">
+                            <td th:text="${system.systemId}"></td>
+                            <td th:text="${system.companyName}"></td>
+                            <td th:text="${system.createdDate}"></td>
+                            <td>
+                                <div class="btn btn-warning btn-md">
+                                    <a
+                                        th:href="@{/admin/systems/edit/{system_id}(system_id=${system.id})}"
+                                        style="color: white; width: 80px; height: 30px;">
+                                        Edit </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn btn-danger btn-md">
+                                    <a
+                                        th:attr="data-systemid=${system.systemId}"
+                                        th:href="@{/admin/systems/delete(id=${system.id})}"
+                                        style="color: #ffffff"
+                                        class="del"> Delete </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script>
+        	$(function() {
+        		$('.del').on(
+        				'click',function(e) {
+        					e.preventDefault();
+        					var goToLink = $(this).attr("href");
+        					var system_id = $(this).attr("data-systemid");
+							var img = new Image();
+							img.src = "/resources/images/warning.jpg";
+							alertify.confirm('<h4>Confirm deletion</h4>',
+									'<img src="'+img.src+'" width="60" height="60"/>'
+									+ '&nbsp;&nbsp;&nbsp;You are about to delete <b>'
+									+ system_id+ '</b>. Are you sure ?',
+									function() {
+										$(location).attr('href',goToLink);
+										},
+									function() {
+											
+										}).set('labels', {ok:'Yes', cancel:'No'});
+							});
+        		});
+		</script>
+        <div class="form-group">
+            <div class="col-sm-offset-8.5 col-sm-3">
+                <ul th:each="templateCalendar : ${templateCalendars}">
+                    <li><a
+                            th:href="@{/admin/calendar_template/view/{calendarId}(calendarId=${templateCalendar.calendarId})}"
+                            th:text="${templateCalendar.calendarName}"></a>
+                    </li>
+                </ul>
+                <br />
+                <a th:href="@{/admin/calendar_template/new}"> +Add </a>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

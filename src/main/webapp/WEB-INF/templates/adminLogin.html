@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>F-REPO System admin site</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+    href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+    media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet"
+    href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style>
+body {
+	padding-top: 100px;
+	padding-left: 400px;
+}
+</style>
+
+<script>
+	$(function() {
+		$("#dialog-message").dialog({
+			modal : true,
+			buttons : {
+				Ok : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+	});
+</script>
+</head>
+<body>
+    <span th:if="${loginError}">
+        <span id="dialog-message" title="Error">
+            <p>
+                <img
+                    th:src="@{https://1.bp.blogspot.com/-D02tSQTZfIY/WFLDLYAAmqI/AAAAAAAA4o4/7EQcMtACxU0YABcLc0QzhLXkaoSh1IsMQCPcBGAYYCw/s1600/warning_sign.png}"
+                    width="60" height="60" align="middle" />
+                Invalid Login ID or Password.
+            </p>
+        </span>
+    </span>
+    <div class="control-label col-sm-7">
+        <div class="panel panel-default" align="center">
+            <form action="#" th:action="@{/admin_login}"
+                th:object="${systemAccount}" method="post">
+                <div class="form-group" align="center">
+                    <img
+                        th:src="@{/resources/images/F-REPO logo_for_login.png}"
+                        width="165" height="100" />
+                </div>
+                <br />
+                <div class="form-group">
+                    <label class="control-label col-sm-6">
+                        <h4>
+                            <b>System Admin Login</b>
+                        </h4>
+                    </label>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    <label class="control-label col-sm-4">
+                        Admin ID:
+                        <font color="red">*</font>
+                    </label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control"
+                            th:field="*{loginId}" placeholder="Login ID"
+                            required="required" />
+                    </div>
+                </div>
+                <br />
+                <br />
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4">
+                        Password:
+                        <font color="red">*</font>
+                    </label>
+                    <div class="col-sm-7">
+                        <input type="password" class="form-control"
+                            th:field="*{loginPassword}"
+                            placeholder="Password" required="required" />
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-1">
+                        <button type="submit" class="btn btn-warning">Log
+                            in</button>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+            </form>
+        </div>
+    </div>
+</body>
+</html>
